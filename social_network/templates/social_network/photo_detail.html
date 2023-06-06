@@ -1,0 +1,17 @@
+{% extends "social_network/base.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+  <img src="{{ post.picture.url }}" style="max-width: 250px; max-height: 250px">
+  
+  <h3>Comments:</h3>
+  {% for comment in comments %}
+    <p>{{ comment.text }}</p>
+  {% endfor %}
+  
+  <form method="POST">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button type="submit">Add comment</button>
+  </form>
+{% endblock %}

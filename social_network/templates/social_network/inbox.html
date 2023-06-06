@@ -1,0 +1,15 @@
+{% extends "social_network/base.html" %}
+
+{% block content %}
+  <h2>Inbox</h2>
+  
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li><a href="{% url 'read_message' message.id %}">{{ message.subject }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No messages in your inbox.</p>
+  {% endif %}
+{% endblock %}

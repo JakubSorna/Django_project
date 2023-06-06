@@ -1,0 +1,29 @@
+{% extends "social_network/base.html" %}
+
+{% block content %}      
+<h1>{{ profile.nickname}}</h1>
+{% if profile.profile_picture.url != None %}
+<p><img src="{{ profile.profile_picture.url }}"style= "max-width: 200px; max-height: 200px"></p>
+{% endif %}
+<div class="d-flex justify-content-end">
+    <a href="{% url 'setting' %}" class="btn btn-primary">Change Password</a>
+    <a href="{% url 'set_profile' %}" class="btn btn-primary ml-2">Set Profile</a>
+</div>
+<p>{{ profile.bio }}</p>
+{% if items %}
+      {% for item in items %}
+        
+          {% if item.user.nickname %}
+            <h3>{{ item.user.nickname }}</h3>
+            <p>{{item.pub_date}} :</p><br>
+          {% endif %}
+          {% if item.picture %}
+            <a href="{% url 'photo_detail' item.id %}"><img src="{{ item.picture.url }}" style="max-width: 400px; max-height: 400px"></a><br><br>
+          {% endif %}
+          {% if item.text %}
+            <a href="{% url 'post_detail' item.id %}"><p>{{ item.text }}</p></a><br><br>
+          {% endif %}
+          
+      {% endfor %}
+  {% endif %}
+{% endblock %}

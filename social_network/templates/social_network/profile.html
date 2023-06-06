@@ -1,0 +1,22 @@
+{% extends "social_network/base.html" %}
+
+{% block content %}
+  <h1>{{ profile.nickname }}</h1>
+  {% if profile.profile_picture.url != None %}
+    <p><img src="{{ profile.profile_picture.url }}" style="max-width: 200px; max-height: 200px"></p>
+  {% endif %}
+  {% if user.is_authenticated %}
+	{% if is_following %}
+		<form method="POST">
+	        {% csrf_token %}
+	        <button type="submit" class="btn btn-primary">Unfollow</button>
+	    </form>
+	{% else %}
+		<form method="POST">
+	        {% csrf_token %}
+	        <button type="submit" class="btn btn-primary">Follow</button>
+	    </form>
+	{% endif %}
+  {% endif %}
+  <p>{{ profile.bio }}</p>
+{% endblock %}

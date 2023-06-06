@@ -1,0 +1,15 @@
+{% extends "social_network/base.html" %}
+
+{% block content %}
+  <h2>Read Message</h2>
+  
+  <div>
+    <p>From: {{ message.sender.username }}</p>
+    <p>Date: {{ message.date }}</p>
+    <p>Subject: {{ message.subject }}</p>
+    <p>Message: {{ message.body }}</p>
+  </div>
+
+  <a href="{% url 'inbox' %}">Back to Inbox</a>
+  
+{% endblock %}
