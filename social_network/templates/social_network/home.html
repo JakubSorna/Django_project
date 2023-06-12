@@ -1,20 +1,54 @@
+{<!-- template.html -->
+
 {% extends "social_network/base.html" %}
+
+{% block head %}
+  <style>
+    .post-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .post-container h3 {
+      margin: 0;
+    }
+
+    .post-container p {
+      margin: 0;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .post-container a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .post-container img {
+      max-width: 400px;
+      max-height: 400px;
+    }
+  </style>
+{% endblock %}
 
 {% block content %}
   {% if items %}
-      {% for item in items %}
-        
-          {% if item.user.nickname %}
-            <h3>{{ item.user.nickname }}</h3>
-            <p>{{item.pub_date}} :</p><br>
-          {% endif %}
-          {% if item.picture %}
-            <a href="{% url 'photo_detail' item.id %}"><img src="{{ item.picture.url }}" style="max-width: 400px; max-height: 400px"></a><br><br>
-          {% endif %}
-          {% if item.text %}
-            <a href="{% url 'post_detail' item.id %}"><p>{{ item.text }}</p></a><br><br>
-          {% endif %}
-          
-      {% endfor %}
+    {% for item in items %}
+      <div class="post-container">
+        {% if item.user.nickname %}
+          <h3>{{ item.user.nickname }}</h3>
+          <p>{{ item.pub_date }} :</p><br>
+        {% endif %}
+        {% if item.picture %}
+          <a href="{% url 'photo_detail' item.id %}"><img src="{{ item.picture.url }}"></a><br><br>
+        {% endif %}
+        {% if item.text %}
+          <a href="{% url 'post_detail' item.id %}"><p>{{ item.text }}</p></a><br><br>
+        {% endif %}
+      </div>
+    {% endfor %}
   {% endif %}
 {% endblock %}

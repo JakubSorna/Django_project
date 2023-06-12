@@ -41,7 +41,7 @@ def login_view(request):
 
 def logout_view(request):
 	logout(request) 
-	return redirect("/register/")
+	return redirect("register")
 
 def my_profile(request):
 	profile = request.user.profile
